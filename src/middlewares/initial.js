@@ -30,6 +30,8 @@ module.exports = (app) => {
     //Options
     app.options('*', function (req,res) { res.sendStatus(200)});
 
+    app.use(require('express').static(path.join(__dirname, '../../client/build')))
+
     //Passport Intialize
     passport.use('login', localStrategy);
     passport.use('jwt', JwtStrategy);
