@@ -1,0 +1,70 @@
+{
+  "name": "article_application",
+  "version": "1.0.0",
+  "description": "Article application",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "nodemon src/index.js",
+    "build": "cd client && npm install && npm run build"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.0",
+    "cloudinary": "^1.26.3",
+    "connect-multiparty": "^2.2.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-useragent": "^1.0.15",
+    "express-validator": "^6.10.0",
+    "express-validators": "^1.0.4",
+    "http-status": "^1.5.0",
+    "http-status-codes": "^2.1.4",
+    "jsonwebtoken": "^8.5.1",
+    "module-alias": "^2.2.2",
+    "moment": "^2.29.1",
+    "mongoose": "^5.11.19",
+    "mongoose-validator": "^2.1.0",
+    "nanoid": "^3.1.25",
+    "nodemailer": "^6.5.0",
+    "parse-request": "^4.0.0",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "request": "^2.88.2",
+    "slug": "^5.1.0",
+    "slugify": "^1.6.0",
+    "validate.js": "^0.13.1",
+    "winston": "^3.3.3",
+    "winston-transport-sentry-node": "^1.0.2"
+  },
+  "_moduleAliases": {
+    "@root": ".",
+    "@controllers": "./src/controllers",
+    "@models": "./src/models",
+    "@services": "./src/services",
+    "@middlewares": "./src/middlewares",
+    "@config": "./src/config",
+    "@routes": "./src/routes",
+    "@schemas": "./src/schemas",
+    "@helper": "./src/helpers",
+    "@logger": "./src/helpers/logger",
+    "@utils": "./src/utils",
+    "@schema": "./src/schemas",
+    "@validators": "./src/validators",
+    "@handler": "./src/handler",
+    "@app": "./src/"
+  },
+  "engines": {
+    "node": "14.x"
+  },
+  "devDependencies": {
+    "mocha": "^9.1.0",
+    "should": "^13.2.3",
+    "supertest": "^6.1.6"
+  }
+}
