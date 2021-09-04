@@ -32,8 +32,8 @@ const AuthController = {
                 if(!user) return req.errorResponseHelper(res, "User not found", StatusCodes.BAD_REQUEST);
                 const token = signNewToken(user._id);
                 const response = { ...Object.assign(UserHelper.sanitizeUserObject(user)), token };
-                req.successResponseHelper(res, 
-                    getStatusText(httpStatus.OK), 
+                return req.successResponseHelper(res, 
+                    getStatusText(StatusCodes.OK), 
                     response, 
                     StatusCodes.OK);
             })
