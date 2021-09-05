@@ -67,7 +67,7 @@ const ArticlesService = {
             author: userId,
             title,
             description,
-            thumbnail: uploadImage?.url,
+            thumbnail: uploadImage && uploadImage.url,
             slug,
             tags,
             is_private
