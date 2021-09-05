@@ -20,6 +20,7 @@
      },
      thumbnail: {
          type: String,
+         default: 'https://res.cloudinary.com/mgdeveloper/image/upload/v1630860622/default-thumbnail_g4g0x0.jpg'
      },
      slug: {
          type: String,

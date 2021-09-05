@@ -10,7 +10,7 @@ exports.uploadFileToCloud = async(file) => {
     try {
         const rs = await cloudinary.uploader.upload(file) || {};
         return {
-            url: rs.secure_url
+            url: rs?.secure_url
         }
     } catch(error) {    
         return null;

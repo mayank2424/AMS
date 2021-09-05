@@ -8,10 +8,8 @@ const ArticleCard = (props) => {
         title, 
         description, 
         likesCount, 
-        authorName, 
-        tags, 
+        authorName,
         authorProfile, 
-        authorId,
         publishedTime, 
         slug,
         history,
@@ -21,7 +19,6 @@ const ArticleCard = (props) => {
         author,
         context
     } = props;
-    console.log({props});
 
     return (
         <div 
