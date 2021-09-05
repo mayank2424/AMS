@@ -61,7 +61,6 @@ const ArticlesService = {
      */
     addArticle: async (userId, payload) => {
         const { title, description, tags, file = {}, is_private } = payload;
-        console.log({payload})
         const slug = generateSlugFromString(title);
         const uploadImage = await uploadFileToCloud(file.thumbnail.path);
         const response = {
@@ -137,8 +136,6 @@ const ArticlesService = {
             likes: user
         }})
     },
-
-
 
 };
 

@@ -1,11 +1,11 @@
 // @ts-nocheck
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux'
-import { getUserArticles } from '../actions/article';
+import { getUserArticles, deleteArtcile } from '../actions/article';
 import ListArticles from '../components/ListArticles';
 
 const ArticlesWrapper = (props) => {
-    const { getUserArticles, articles } = props;
+    const { getUserArticles, articles, deleteArtcile } = props;
 
     //Get all the public articles
     useEffect(() => {
@@ -25,7 +25,13 @@ const ArticlesWrapper = (props) => {
 
     }
 
-    return <ListArticles articles={articles.data || []} {...props} message={'My Articles'}/>;
+    return <ListArticles 
+        articles={articles.data || []} 
+        {...props} 
+        message={'My Articles'} 
+        deleteArticleAction={deleteArtcile}
+        context="my"
+    />;
 }
 
 const mapStateToProps = (state) => {
@@ -35,5 +41,6 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {
-    getUserArticles
+    getUserArticles,
+    deleteArtcile
 })(ArticlesWrapper);

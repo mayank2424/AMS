@@ -3,11 +3,28 @@ import React from 'react';
 const moment = require('moment');
 
 const ArticleCard = (props) => {
-    const { thumbnail, title, description, likesCount, authorName, tags, authorProfile, publishedTime, slug, history, is_private } = props;
+    const { 
+        thumbnail, 
+        title, 
+        description, 
+        likesCount, 
+        authorName, 
+        tags, 
+        authorProfile, 
+        authorId,
+        publishedTime, 
+        slug,
+        history,
+        is_private, 
+        deleteArticleAction,
+        user,
+        author,
+        context
+    } = props;
+    console.log({props});
 
     return (
         <div 
-            onClick={() => history.push(`/article/${slug}`)}
             className='max-w-xl w-full px-4 py-3 bg-white shadow-md rounded-md my-8 cursor-pointer'>
             <div className="flex justify-between items-center">
                 <div className="text-sm font-light flex flex-row gap-2 items-center">
@@ -20,6 +37,11 @@ const ArticleCard = (props) => {
                 </div>
                 <div className='flex gap-3'>
                     {
+                        context && context === 'my' && author?._id && user?._id && user?._id === author._id ? <span onClick={deleteArticleAction} >
+                            <img className='w-5' src="https://res.cloudinary.com/mgdeveloper/image/upload/v1630854601/trash_gumczn.png" alt='delete_icon'/>
+                        </span> : null
+                    }
+                    {
                         is_private 
                             ? <span className='text-xs ml-2 bg-yellow-600 p-1 rounded-md text-white'>Private</span> 
                             : <span className='text-xs ml-2 bg-green-600 p-1 rounded-md text-white'>Public</span> 
@@ -30,7 +52,9 @@ const ArticleCard = (props) => {
                 </div>
             </div>
 
-            <div className='flex flex-row flex-auto mt-3 items-center justify-between gap-4'>
+            <div 
+             onClick={() => history.push(`/article/${slug}`)}
+            className='flex flex-row flex-auto mt-3 items-center justify-between gap-4'>
                 <div>
                     <div>
                         <h1 className="text-lg font-semibold mt-2 max-w-full" style={{

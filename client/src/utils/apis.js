@@ -28,6 +28,9 @@ const APIS = {
         },
         getSingleArticle: {
             url: (id) => `${url}/p/article/${id}`
+        },
+        deleteArticle: {
+            url: (id) => `${url}/article/${id}`
         }
     }
 };

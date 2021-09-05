@@ -8,7 +8,7 @@ import Message from './Message'
 const moment = require('moment');
 
 const ArticleRead = (props) => {
-    const { getSingleArticle, article, match: { params }, likeArticle, likeArticleData, unLikeArticle, unLikeArticleData } = props;
+    const { getSingleArticle, article, match: { params }, likeArticle, likeArticleData, unLikeArticle, unLikeArticleData, user } = props;
     const [likedType, likeAction] = useState(null);
 
     useEffect(() => {
@@ -81,8 +81,8 @@ const ArticleRead = (props) => {
                 <div className='flex flex-col'>
                     <span className='text-base italic'>
                             <label className="text-gray-400 font-bold mr-2">Published by:</label> 
-                            <span className='bg-blue-500 text-white rounded p-1'>
-                                { author?.name }
+                            <span className={`${user?.data?._id === author?._id ? 'bg-green-500' : 'bg-blue-500' } text-white rounded p-1`}>
+                                {  user?.data?._id === author?._id ? 'You' : author?.name }
                             </span>
                     </span><br />
                 </div>
@@ -115,7 +115,8 @@ const mapStateToProps = (state) => {
     return {
         article: state.articlesState.article,
         likeArticleData: state.articlesState.likeArticle,
-        unLikeArticleData: state.articlesState.unlikeArticle
+        unLikeArticleData: state.articlesState.unlikeArticle,
+        user: state.userState.user_info
     }
 }
 

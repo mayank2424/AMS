@@ -10,13 +10,13 @@ export const addNewArticle = (payload) => {
             type: 'ADD_ARTICLE',
             status: 0
         });
+        toast.loading('Saving Article');
         request(APIS.articles.add.url, {
             method: 'POST',
             headers: {},
             body: payload
         })
         .then(rs => {
-            console.log({rs});
             if(rs.statusCode === 200 || rs.statusCode === 201) {
                 dispatch({
                     type: 'SET_ADD_ARTICLE',
@@ -220,6 +220,50 @@ export const unLikeArticle = (payload) => {
         .catch(err => {
             dispatch({
                 type: 'SET_UNLIKE_ARTICLE',
+                response: 'Oops Something bad happened',
+                status: -1
+            })
+        })
+    }
+}
+
+
+export const deleteArtcile = (payload) => {
+    return (dispatch) => {
+        dispatch({
+            type: 'DELETE_ARTICLE',
+            status: 0
+        });
+        request(APIS.articles.deleteArticle.url(payload.id), {
+            method: 'DELETE',
+            headers: {}
+        })
+        .then(rs => {
+            if(rs.statusCode === 200) {
+                dispatch({
+                    type: 'SET_DELETE_ARTICLE',
+                    response: rs?.response,
+                    status: 1
+                });
+                
+                //On Deleting reload the state
+                dispatch({
+                    type: 'UPDATE_ARTICLE_LIST',
+                    toDelete: payload,  
+                    status: 1
+                })
+                
+            } else {
+                dispatch({  
+                    type: 'SET_DELETE_ARTICLE',
+                    response: 'Oops, Something bad happened',
+                    status: -1
+                })
+            }
+        })
+        .catch(err => {
+            dispatch({
+                type: 'SET_DELETE_ARTICLE',
                 response: 'Oops Something bad happened',
                 status: -1
             })

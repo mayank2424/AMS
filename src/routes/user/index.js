@@ -6,10 +6,7 @@ const router = require('express').Router({
     caseSensitive : true,
     strict        : true,
 });
-const { isAdmin } = require('@middlewares/auth')
 const { UserController } = require('@controllers/index');
-const { checkError } = require('@helper/validation');
-const { addUser, deleteUser } = require('@validators/user.validator');
 
 
  /**

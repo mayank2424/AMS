@@ -20,7 +20,6 @@ const ArticleEditor = (props) => {
 
     const handleTextAreaChange = (e) => {
        const { name, value } = e.target;
-       console.log({name, value})
        if(name === 'title') {
             if(value.length > 100) return;
             setTitle(value);
@@ -51,7 +50,7 @@ const ArticleEditor = (props) => {
         }
     }, [addArticle])
     return (
-        <div className='w-1/2 m-auto p-20 font-mono'>
+        <div className={`w-1/2 m-auto p-20 font-mono ${addArticle?.status === 0 ? 'pointer-events-none' : ''}`}>
 
             <div className="flex flex-col mb-20">
                 <label className='text-gray-700 text-3xl font-bold mb-5'>Thumbnail:</label>
@@ -70,6 +69,7 @@ const ArticleEditor = (props) => {
                     onChange={handleTextAreaChange}
                     name='title'
                     value={title}
+                    disabled={addArticle?.status === 0}
                 />
             </div>
 
@@ -82,6 +82,7 @@ const ArticleEditor = (props) => {
                     onChange={handleTextAreaChange}
                     name='description'
                     value={description}
+                    disabled={addArticle?.status === 0}
 
                 />
             </div>

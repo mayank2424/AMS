@@ -5,6 +5,6 @@ module.exports = {
     DATABASE: {
         URI:DB_URI
     },
-    JWT_SECRET: '$&&__toll_system_&&$%@#$@&!@#',
+    JWT_SECRET: '$&&__article_app_&&$%@#$@&!@#',
     SECRET_KEY,
 }

@@ -20,11 +20,17 @@ const ArticlesList = (props) => {
                             likesCount={article?.likes?.length || 0}
                             authorName={article.author?.name || article.author?.user_name}
                             authorProfile={article.author?.profile_image}
+                            author={article.author}
                             publishedTime={article.createdAt}
                             slug={article.slug}
                             history={props.history}
                             is_private={article.is_private}
                             likesCount={article?.likes?.length}
+                            deleteArticleAction={() => props.deleteArticleAction({
+                                id: article._id
+                            })}
+                            user={props?.user?.data}
+                            context={props.context}
                         />
                     ))
                 }

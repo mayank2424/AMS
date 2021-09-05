@@ -46,7 +46,7 @@
      deleteArticle: async(req, res) => {
         try {
             const { user, params: { id } } = req;
-            const rs = await ArticleService.deleteArticle(user._id, slug);
+            const rs = await ArticleService.deleteArticle(user._id, id);
             return req.successResponseHelper(res, null, rs, StatusCodes.OK);
         } catch(error) {
             return req.errorResponseHelper(res, error.message);

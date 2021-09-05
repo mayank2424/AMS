@@ -25,6 +25,10 @@ const initialState = {
     unlikeArticle: {
         data: null,
         status: null
+    },
+    deleteArticle: {
+        status: null,
+        data: null,
     }
 };
 
@@ -41,7 +45,10 @@ const types = {
     LIKE_ARTICLE: 'LIKE_ARTICLE',
     SET_LIKE_ARTICLE: 'SET_LIKE_ARTICLE',
     UNLIKE_ARTICLE: 'UNLIKE_ARTICLE',
-    SET_UNLIKE_ARTICLE: 'SET_UNLIKE_ARTICLE'
+    SET_UNLIKE_ARTICLE: 'SET_UNLIKE_ARTICLE',
+    DELETE_ARTICLE: 'DELETE_ARTICLE',
+    SET_DELETE_ARTICLE: 'SET_DELETE_ARTICLE',
+    UPDATE_ARTICLE_LIST: 'UPDATE_ARTICLE_LIST'
 }
 
 const articlesReducer = (state = initialState, action) => {
@@ -54,6 +61,18 @@ const articlesReducer = (state = initialState, action) => {
             }
         });
         case types.SET_ALL_ARTICLES:
+          if(action?.toDelete?.id) { //State Update on delete article
+              const currentState = state.articles?.data;
+              if(currentState && currentState.length) {
+                  const filteredArticles = currentState.filter(article => article._id !== action.toDelete.id);
+                  return  Object.assign({}, state, {
+                    articles: {
+                        data: filteredArticles,
+                        status: action.status,
+                    }
+              })
+            }
+          }
           return Object.assign({}, state, {
             articles: {
                 data: action.response,
@@ -141,21 +160,59 @@ const articlesReducer = (state = initialState, action) => {
                 }
             });
 
-            case types.UNLIKE_ARTICLE:
-                return Object.assign({}, state, {
-                    unlikeArticle: {
-                        data: null,
-                        status: 0,
-                    }
-                });
-            
-            case types.SET_UNLIKE_ARTICLE:
-                return Object.assign({}, state, {
-                    unlikeArticle: {
-                        data: action.response,
-                        status: action.status,
-                    }
-                });
+        case types.UNLIKE_ARTICLE:
+            return Object.assign({}, state, {
+                unlikeArticle: {
+                    data: null,
+                    status: 0,
+                }
+            });
+        
+        case types.SET_UNLIKE_ARTICLE:
+            return Object.assign({}, state, {
+                unlikeArticle: {
+                    data: action.response,
+                    status: action.status,
+                }
+            });
+        case types.DELETE_ARTICLE:
+            return Object.assign({}, state, {
+                deleteArticle: {
+                    data: null,
+                    status: 0,
+                }
+            });
+        case types.SET_DELETE_ARTICLE:
+            return Object.assign({}, state, {
+                deleteArticle: {
+                    data: action.response,
+                    status: action.status,
+                }
+            });
+        case types.UPDATE_ARTICLE_LIST:
+            let newState;
+            if(action?.toDelete?.id) {
+                const myArticles = state?.articles?.data?.filter(a => a._id !== action?.toDelete?.id);
+                const publicArticles = state.publicArticles?.data?.filter(a => a._id !== action?.toDelete?.id);
+                console.log({myArticles, publicArticles, action})
+                if(myArticles) {
+                    newState = Object.assign(state, {
+                        articles: {
+                            data: myArticles,
+                            status: 1,
+                        }
+                    })
+                }
+                if(publicArticles) {
+                    newState = Object.assign(state, {
+                        publicArticles: {
+                            data: publicArticles,
+                            status: 1,
+                        }
+                    })   
+                }
+                return Object.assign({}, state, newState);
+            }
         
         default: 
             return state;

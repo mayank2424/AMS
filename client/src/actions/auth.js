@@ -38,7 +38,6 @@ export const login = (payload) => {
             }
         })
         .catch(err => {
-            console.log({err});
             const message = err?.response?.data?.response || 'Oops Something bad happened';
             dispatch({
                 type: 'SET_USER_AUTH',
@@ -62,7 +61,6 @@ export const register = (payload) => {
             body: JSON.stringify(payload)   
         })
         .then(rs => {
-            console.log({rs});
             if(rs.statusCode === 200) {
                 dispatch({
                     type: 'SET_USER_AUTH',
@@ -71,7 +69,6 @@ export const register = (payload) => {
                 });
     
                 const result = rs?.response;
-                console.log({result})
                 localStorage.setItem('auth_token', result.token);
                 toast.success('Successfully registered!')
                 PushTo('/');
@@ -85,7 +82,6 @@ export const register = (payload) => {
             }
         })
         .catch(err => {
-            console.log({err});
             const message = err?.response?.data?.response || 'Oops Something bad happened';
             dispatch({
                 type: 'SET_USER_AUTH',
